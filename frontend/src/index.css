@@ -1,0 +1,189 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  /* 
+    =========================================
+    🎨 THE CYBER-DARK THEME (UI Genius Mode)
+    =========================================
+  */
+  
+  /* Deep Obsidian Background */
+  --bg-dark: #09090b;
+  --bg-card: rgba(24, 24, 27, 0.7);
+  
+  /* Matrix Neon Green Accent */
+  --accent-neon: #39FF14;
+  --accent-neon-dim: rgba(57, 255, 20, 0.2);
+  --accent-neon-glow: 0 0 15px rgba(57, 255, 20, 0.4);
+  
+  /* Danger Red for Self Destruct */
+  --accent-danger: #ff3333;
+  --accent-danger-dim: rgba(255, 51, 51, 0.2);
+  --accent-danger-glow: 0 0 15px rgba(255, 51, 51, 0.4);
+
+  /* Typography */
+  --text-main: #f4f4f5;
+  --text-muted: #a1a1aa;
+  
+  --font-ui: 'Inter', system-ui, sans-serif;
+  --font-mono: 'Fira Code', monospace;
+
+  /* Glassmorphism Borders */
+  --border-glass: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--bg-dark);
+  color: var(--text-main);
+  font-family: var(--font-ui);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: 
+    radial-gradient(circle at 50% 0%, rgba(57, 255, 20, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 100% 100%, rgba(57, 255, 20, 0.03) 0%, transparent 50%);
+}
+
+#root {
+  width: 100%;
+}
+
+/* =========================================
+   📦 PREMIUM GLASS CARD
+   ========================================= */
+.cyber-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: var(--border-glass);
+  border-radius: 16px;
+  padding: 2rem;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.cyber-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+/* =========================================
+   🔤 TYPOGRAPHY HIERARCHY
+   ========================================= */
+h1.cyber-title {
+  font-weight: 700;
+  font-size: 2rem;
+  letter-spacing: -0.05em;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(135deg, #fff 0%, var(--text-muted) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+p.cyber-subtitle {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin-bottom: 2rem;
+}
+
+/* =========================================
+   📝 FORM ELEMENTS
+   ========================================= */
+.cyber-textarea {
+  width: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  border: var(--border-glass);
+  border-radius: 8px;
+  color: var(--text-main);
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  padding: 1rem;
+  min-height: 200px;
+  resize: vertical;
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+.cyber-textarea:focus {
+  border-color: var(--accent-neon);
+  box-shadow: 0 0 0 3px var(--accent-neon-dim);
+}
+
+/* =========================================
+   🖱️ BUTTONS (The WOW Factor)
+   ========================================= */
+.cyber-btn {
+  width: 100%;
+  background: var(--accent-neon-dim);
+  color: var(--accent-neon);
+  border: 1px solid var(--accent-neon);
+  border-radius: 8px;
+  padding: 1rem;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 1.5rem;
+}
+
+.cyber-btn:hover:not(:disabled) {
+  background: var(--accent-neon);
+  color: var(--bg-dark);
+  box-shadow: var(--accent-neon-glow);
+  transform: translateY(-1px);
+}
+
+.cyber-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.cyber-btn.danger {
+  background: var(--accent-danger-dim);
+  color: var(--accent-danger);
+  border-color: var(--accent-danger);
+}
+
+.cyber-btn.danger:hover:not(:disabled) {
+  background: var(--accent-danger);
+  color: var(--bg-dark);
+  box-shadow: var(--accent-danger-glow);
+}
+
+/* =========================================
+   🔗 URL DISPLAY BOX
+   ========================================= */
+.url-box {
+  background: rgba(0,0,0,0.5);
+  border: 1px dashed var(--accent-neon);
+  padding: 1rem;
+  border-radius: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  color: var(--accent-neon);
+  word-break: break-all;
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

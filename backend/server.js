@@ -5,6 +5,9 @@ const rateLimit = require('express-rate-limit');
 require('dotenv').config();
 const connectDB = require('./config/db');
 
+// Import routes
+const noteRoutes = require('./routes/notes');
+
 // Connect to MongoDB
 connectDB();
 
@@ -35,7 +38,10 @@ app.use('/api/', apiLimiter);
 // Allows us to parse incoming JSON payloads
 app.use(express.json());
 
+
+
 // Routes
+app.use('/api/notes', noteRoutes);
 app.get('/', (req, res) => {
   res.json({ message: 'BurnAfterReading API is running securely! 🔒' });
 });

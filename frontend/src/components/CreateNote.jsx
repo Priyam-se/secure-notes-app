@@ -15,7 +15,7 @@ const CreateNote = () => {
     setLoading(true);
     try {
       // Send the raw text to our secure backend
-      const response = await axios.post('http://localhost:5000/api/notes', { content });
+      const response = await axios.post(`/api/notes`, { content });
       
       // Generate the shareable link based on the returned ID
       const shareableLink = `${window.location.origin}/note/${response.data.id}`;

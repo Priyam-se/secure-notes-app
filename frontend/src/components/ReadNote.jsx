@@ -15,7 +15,7 @@ const ReadNote = () => {
     setLoading(true);
     try {
       // The moment this GET request hits the backend, the note is deleted forever
-      const response = await axios.get(`http://localhost:5000/api/notes/${id}`);
+      const response = await axios.get(`/api/notes/${id}`);
       setNote(response.data.content);
       setDestroyed(true);
     } catch (err) {

@@ -3,12 +3,14 @@ const cors = require('cors');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 require('dotenv').config();
+const connectDB = require('./config/db');
+
+// Connect to MongoDB
+connectDB();
 
 const app = express();
 
-// ==========================================
-// 🛡️ CYBERSECURITY MIDDLEWARE (The Flex)
-// ==========================================
+
 
 // 1. Helmet helps secure Express apps by setting various HTTP headers.
 // It hides the "X-Powered-By" header and adds XSS protection headers.
@@ -29,22 +31,16 @@ const apiLimiter = rateLimit({
 });
 app.use('/api/', apiLimiter);
 
-// ==========================================
-// 📦 STANDARD MIDDLEWARE
-// ==========================================
+
 // Allows us to parse incoming JSON payloads
 app.use(express.json());
 
-// ==========================================
-// 🚦 ROUTES
-// ==========================================
+// Routes
 app.get('/', (req, res) => {
   res.json({ message: 'BurnAfterReading API is running securely! 🔒' });
 });
 
-// ==========================================
-// 🚀 SERVER START
-// ==========================================
+//Start the server
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {

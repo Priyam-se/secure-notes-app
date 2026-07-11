@@ -1,35 +1,26 @@
 @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Inter:wght@300;400;500;600;700&display=swap');
 
 :root {
-  /* 
-    =========================================
-    🎨 THE CYBER-DARK THEME (UI Genius Mode)
-    =========================================
-  */
+  --bg-dark: #050505;
+  --bg-card: rgba(15, 15, 20, 0.7);
+  --bg-card-hover: rgba(20, 20, 25, 0.85);
   
-  /* Deep Obsidian Background */
-  --bg-dark: #09090b;
-  --bg-card: rgba(24, 24, 27, 0.7);
+  --accent-neon: #00ff41;
+  --accent-neon-dim: rgba(0, 255, 65, 0.15);
+  --accent-neon-glow: 0 0 20px rgba(0, 255, 65, 0.6), 0 0 40px rgba(0, 255, 65, 0.2);
   
-  /* Matrix Neon Green Accent */
-  --accent-neon: #39FF14;
-  --accent-neon-dim: rgba(57, 255, 20, 0.2);
-  --accent-neon-glow: 0 0 15px rgba(57, 255, 20, 0.4);
-  
-  /* Danger Red for Self Destruct */
-  --accent-danger: #ff3333;
-  --accent-danger-dim: rgba(255, 51, 51, 0.2);
-  --accent-danger-glow: 0 0 15px rgba(255, 51, 51, 0.4);
+  --accent-danger: #ff2a2a;
+  --accent-danger-dim: rgba(255, 42, 42, 0.15);
+  --accent-danger-glow: 0 0 20px rgba(255, 42, 42, 0.6), 0 0 40px rgba(255, 42, 42, 0.2);
 
-  /* Typography */
-  --text-main: #f4f4f5;
-  --text-muted: #a1a1aa;
+  --text-main: #e2e8f0;
+  --text-muted: #94a3b8;
   
   --font-ui: 'Inter', system-ui, sans-serif;
   --font-mono: 'Fira Code', monospace;
 
-  /* Glassmorphism Borders */
-  --border-glass: 1px solid rgba(255, 255, 255, 0.08);
+  --border-glass: 1px solid rgba(0, 255, 65, 0.25);
+  --border-glass-danger: 1px solid rgba(255, 42, 42, 0.25);
 }
 
 * {
@@ -47,143 +38,283 @@ body {
   justify-content: center;
   align-items: center;
   background-image: 
-    radial-gradient(circle at 50% 0%, rgba(57, 255, 20, 0.05) 0%, transparent 50%),
-    radial-gradient(circle at 100% 100%, rgba(57, 255, 20, 0.03) 0%, transparent 50%);
+    radial-gradient(circle at 50% -20%, rgba(0, 255, 65, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 50% 120%, rgba(0, 255, 65, 0.1) 0%, transparent 50%),
+    linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)),
+    url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h40v40H0V0zm20 20h20v20H20V20zM0 20h20v20H0V20z' fill='%2300ff41' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
+  overflow-x: hidden;
+  position: relative;
+}
+
+body::before {
+  content: " ";
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+  z-index: 2;
+  background-size: 100% 2px, 3px 100%;
+  pointer-events: none;
+}
+
+body::after {
+  content: " ";
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: rgba(0, 255, 65, 0.02);
+  z-index: 2;
+  pointer-events: none;
+  animation: flicker 0.15s infinite;
+}
+
+@keyframes flicker {
+  0% { opacity: 0.95; }
+  50% { opacity: 0.85; }
+  100% { opacity: 0.95; }
 }
 
 #root {
   width: 100%;
+  padding: 2rem;
+  z-index: 10;
+  position: relative;
+  display: flex;
+  justify-content: center;
 }
 
-/* =========================================
-   📦 PREMIUM GLASS CARD
-   ========================================= */
 .cyber-card {
   background: var(--bg-card);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border: var(--border-glass);
-  border-radius: 16px;
-  padding: 2rem;
+  border-radius: 12px;
+  padding: 2.5rem;
   width: 100%;
-  max-width: 600px;
-  margin: 0 auto;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  max-width: 650px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), inset 0 0 20px rgba(0, 255, 65, 0.05);
+  position: relative;
+  overflow: hidden;
+  animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cyber-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent-neon), transparent);
+  opacity: 0.7;
+}
+
+.cyber-card.danger-card {
+  border: var(--border-glass-danger);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), inset 0 0 20px rgba(255, 42, 42, 0.05);
+}
+.cyber-card.danger-card::before {
+  background: linear-gradient(90deg, transparent, var(--accent-danger), transparent);
 }
 
 .cyber-card:hover {
-  transform: translateY(-2px);
-  border-color: rgba(255, 255, 255, 0.15);
+  background: var(--bg-card-hover);
+  border-color: rgba(0, 255, 65, 0.4);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9), inset 0 0 30px rgba(0, 255, 65, 0.1);
 }
 
-/* =========================================
-   🔤 TYPOGRAPHY HIERARCHY
-   ========================================= */
+.cyber-card.danger-card:hover {
+  border-color: rgba(255, 42, 42, 0.4);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9), inset 0 0 30px rgba(255, 42, 42, 0.1);
+}
+
+@keyframes slideUp {
+  0% { opacity: 0; transform: translateY(30px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
 h1.cyber-title {
   font-weight: 700;
-  font-size: 2rem;
-  letter-spacing: -0.05em;
-  margin-bottom: 0.5rem;
-  background: linear-gradient(135deg, #fff 0%, var(--text-muted) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  font-size: 2.2rem;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.75rem;
+  color: #fff;
+  text-shadow: 0 0 10px rgba(255,255,255,0.4);
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.75rem;
 }
 
 p.cyber-subtitle {
   color: var(--text-muted);
-  font-size: 0.95rem;
+  font-size: 1.05rem;
+  line-height: 1.6;
   margin-bottom: 2rem;
+  font-weight: 400;
 }
 
-/* =========================================
-   📝 FORM ELEMENTS
-   ========================================= */
 .cyber-textarea {
   width: 100%;
-  background: rgba(0, 0, 0, 0.4);
-  border: var(--border-glass);
+  background: rgba(0, 0, 0, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 8px;
-  color: var(--text-main);
+  color: var(--accent-neon);
   font-family: var(--font-mono);
-  font-size: 0.95rem;
-  padding: 1rem;
-  min-height: 200px;
+  font-size: 1rem;
+  line-height: 1.6;
+  padding: 1.25rem;
+  min-height: 220px;
   resize: vertical;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
   outline: none;
+  box-shadow: inset 0 4px 15px rgba(0,0,0,0.6);
 }
 
 .cyber-textarea:focus {
   border-color: var(--accent-neon);
-  box-shadow: 0 0 0 3px var(--accent-neon-dim);
+  box-shadow: inset 0 4px 15px rgba(0,0,0,0.6), 0 0 0 2px var(--accent-neon-dim);
+  background: rgba(0, 0, 0, 0.9);
 }
 
-/* =========================================
-   🖱️ BUTTONS (The WOW Factor)
-   ========================================= */
+.cyber-textarea::placeholder {
+  color: rgba(0, 255, 65, 0.35);
+}
+
 .cyber-btn {
   width: 100%;
-  background: var(--accent-neon-dim);
+  background: rgba(0, 255, 65, 0.05);
   color: var(--accent-neon);
   border: 1px solid var(--accent-neon);
-  border-radius: 8px;
-  padding: 1rem;
+  border-radius: 6px;
+  padding: 1.1rem;
   font-family: var(--font-mono);
   font-weight: 600;
-  font-size: 1rem;
+  font-size: 1.1rem;
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.75rem;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.1em;
   margin-top: 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.cyber-btn::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%; width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 255, 65, 0.3), transparent);
+  transition: all 0.5s ease;
 }
 
 .cyber-btn:hover:not(:disabled) {
   background: var(--accent-neon);
-  color: var(--bg-dark);
+  color: #000;
   box-shadow: var(--accent-neon-glow);
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+}
+
+.cyber-btn:hover:not(:disabled)::before {
+  left: 100%;
+}
+
+.cyber-btn:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
 }
 
 .cyber-btn:disabled {
-  opacity: 0.5;
+  opacity: 0.4;
   cursor: not-allowed;
+  border-color: var(--text-muted);
+  color: var(--text-muted);
 }
 
 .cyber-btn.danger {
-  background: var(--accent-danger-dim);
+  background: rgba(255, 42, 42, 0.05);
   color: var(--accent-danger);
   border-color: var(--accent-danger);
 }
 
+.cyber-btn.danger::before {
+  background: linear-gradient(90deg, transparent, rgba(255, 42, 42, 0.3), transparent);
+}
+
 .cyber-btn.danger:hover:not(:disabled) {
   background: var(--accent-danger);
-  color: var(--bg-dark);
+  color: #fff;
   box-shadow: var(--accent-danger-glow);
 }
 
-/* =========================================
-   🔗 URL DISPLAY BOX
-   ========================================= */
 .url-box {
-  background: rgba(0,0,0,0.5);
-  border: 1px dashed var(--accent-neon);
-  padding: 1rem;
+  background: rgba(0,0,0,0.8);
+  border: 1px solid var(--accent-neon);
+  padding: 1.25rem;
   border-radius: 8px;
   font-family: var(--font-mono);
-  font-size: 0.9rem;
-  color: var(--accent-neon);
+  font-size: 0.95rem;
+  color: #fff;
   word-break: break-all;
-  margin-top: 1rem;
+  margin-top: 1.5rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  box-shadow: inset 0 0 20px rgba(0,255,65,0.15);
+}
+
+.copy-btn {
+  background: var(--accent-neon-dim);
+  border: 1px solid var(--accent-neon);
+  color: var(--accent-neon);
+  border-radius: 6px;
+  padding: 0.6rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.copy-btn:hover {
+  background: var(--accent-neon);
+  color: #000;
+  box-shadow: 0 0 15px rgba(0,255,65,0.6);
+}
+
+.success-text {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--accent-neon);
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
+}
+
+.typing-animation {
+  overflow: hidden;
+  border-right: .15em solid var(--accent-neon);
+  white-space: nowrap;
+  margin: 0 auto;
+  letter-spacing: .15em;
+  animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite;
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: var(--accent-neon); }
 }

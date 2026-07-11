@@ -57,34 +57,34 @@ const CreateNote = () => {
           />
           <button type="submit" className="cyber-btn" disabled={loading || !content.trim()}>
             <Lock size={20} />
-            {loading ? 'Encrypting...' : 'Generate Secret Link'}
+            {loading ? 'ENCRYPTING...' : 'ENCRYPT & GENERATE LINK'}
           </button>
         </form>
       ) : (
-        <div style={{ marginTop: '2rem' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--accent-neon)' }}>
-            <AlertTriangle size={20} />
-            <strong>Success! Your note is encrypted.</strong>
+        <div style={{ marginTop: '2.5rem' }}>
+          <div className="success-text">
+            <AlertTriangle size={24} />
+            <span>ENCRYPTION SUCCESSFUL</span>
           </div>
-          <p style={{ color: 'var(--text-muted)', marginTop: '0.5rem', fontSize: '0.9rem' }}>
-            Anyone with this link can read the note ONCE. After that, it is gone forever.
+          <p style={{ color: 'var(--text-muted)', marginTop: '0.75rem', fontSize: '0.95rem', lineHeight: '1.5' }}>
+            The note is secured. Anyone with this link can read the note <strong>ONCE</strong>. After that, it self-destructs.
           </p>
           
           <div className="url-box">
-            <span>{url}</span>
+            <span style={{ opacity: 0.9 }}>{url}</span>
             <button 
+              className="copy-btn"
               onClick={copyToClipboard}
-              style={{ background: 'transparent', border: 'none', color: 'var(--accent-neon)', cursor: 'pointer' }}
               title="Copy to clipboard"
             >
               <Copy size={20} />
             </button>
           </div>
           
-          {copied && <p style={{ color: 'var(--accent-neon)', fontSize: '0.8rem', marginTop: '0.5rem', textAlign: 'right' }}>Copied to clipboard!</p>}
+          {copied && <p style={{ color: 'var(--accent-neon)', fontFamily: 'var(--font-mono)', fontSize: '0.85rem', marginTop: '0.75rem', textAlign: 'right', animation: 'slideUp 0.3s ease' }}>[Link Copied to Clipboard]</p>}
 
-          <button onClick={() => setUrl('')} className="cyber-btn" style={{ marginTop: '2rem', background: 'transparent', borderStyle: 'dashed' }}>
-            Create Another Note
+          <button onClick={() => setUrl('')} className="cyber-btn" style={{ marginTop: '2.5rem', background: 'transparent', borderStyle: 'dashed' }}>
+            INITIALIZE NEW SECURE NOTE
           </button>
         </div>
       )}
